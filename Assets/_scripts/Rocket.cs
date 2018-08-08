@@ -19,27 +19,39 @@ public class Rocket : MonoBehaviour
     }
     private void ProcessInput()
     {
+        thrusters();
+        rotators();
+
+    }
+private void thrusters()
+    {
         if (Input.GetKey(KeyCode.Space))
         {
             print("thrusters engage");
             rigidBody.AddRelativeForce(Vector3.up);
-            if (!audioSource.isPlaying) {
+            if (!audioSource.isPlaying)
+            {
                 audioSource.Play();
             }
         }
-        else { audioSource.Stop(); } 
-
+        else { audioSource.Stop(); }
+    }
+    private void rotators()
+    {
+        rigidBody.freezeRotation = true;//take manual control of rotation
         if (Input.GetKey(KeyCode.A))
         {
             print("Rotating left");
             transform.Rotate(Vector3.forward);
-            
+
         }
         else if (Input.GetKey(KeyCode.D))
         {
             print("Rotating Right");
             transform.Rotate(-Vector3.forward);
         }
-
+        rigidBody.freezeRotation = false;//resume physics
     }
+
+    
 }

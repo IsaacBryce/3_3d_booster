@@ -7,6 +7,7 @@ public class Rocket : MonoBehaviour
     AudioSource audioSource;
     [SerializeField]float rcsThrust = 100f;
     [SerializeField]float Boosters = 100f;
+    
 
     void Start()
     {
@@ -59,7 +60,7 @@ public class Rocket : MonoBehaviour
         else { audioSource.Stop(); }
     }
 
-private void rotators()
+    private void rotators()
     {
         rigidBody.freezeRotation = true;//take manual control of rotation
 

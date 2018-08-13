@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class Rocket : MonoBehaviour
     AudioSource audioSource;
     [SerializeField]float rcsThrust = 100f;
     [SerializeField]float Boosters = 100f;
+
     
 
     void Start()
@@ -34,11 +36,13 @@ public class Rocket : MonoBehaviour
             case "Friendly":
                 print("ok");
                 break;
-            case "Fuel":
-                print("refueled");
+            case "Finish":
+                print("Fin");
+                SceneManager.LoadScene(1);
                 break;
             default:
                 print("ded");
+                SceneManager.LoadScene(0);
                 break;
 
         }

@@ -8,7 +8,9 @@ public class Rocket : MonoBehaviour
     AudioSource audioSource;
     [SerializeField]float rcsThrust = 100f;
     [SerializeField]float Boosters = 100f;
-
+    [SerializeField] AudioClip mainEngine ;
+    [SerializeField] AudioClip transcendAudio;
+    [SerializeField] AudioClip deathAudio;
 
     enum State {Alive, Dying, Trancending }
     State state = State.Alive;
@@ -48,12 +50,13 @@ public class Rocket : MonoBehaviour
                 print("Fin");
                 state = State.Trancending;
                 Invoke("LoadNextScene",1f);
+                audioSource.PlayOneShot(transcendAudio);
                 break;
             default:
                 print("ded");
                 state = State.Dying;
                 Invoke("ReloadLevel_1",1f);
-
+                audioSource.PlayOneShot(deathAudio);
                 break;
 
         }
@@ -62,30 +65,35 @@ public class Rocket : MonoBehaviour
     private void ReloadLevel_1()
     {
         SceneManager.LoadScene(0);
+        
     }
 
     private void LoadNextScene()
     {
         SceneManager.LoadScene(1);
+        
     }
 
     private void thrusters()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-                      
-            print("thrusters engage");
-            float BoostThis = Boosters * Time.deltaTime;
+            applyThrusting();
 
-            rigidBody.AddRelativeForce(Vector3.up * BoostThis);
-            if (!audioSource.isPlaying)
-                {
-                    audioSource.Play();
-                }                
-            
-               
         }
         else { audioSource.Stop(); }
+    }
+
+    private void applyThrusting()
+    {
+        print("thrusters engage");
+        float BoostThis = Boosters * Time.deltaTime;
+
+        rigidBody.AddRelativeForce(Vector3.up * BoostThis);
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(mainEngine);
+        }
     }
 
     private void rotators()

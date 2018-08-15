@@ -47,19 +47,31 @@ public class Rocket : MonoBehaviour
                 print("ok");
                 break;
             case "Finish":
-                print("Fin");
-                state = State.Trancending;
-                Invoke("LoadNextScene",1f);
-                audioSource.PlayOneShot(transcendAudio);
+                successSequence();
                 break;
             default:
-                print("ded");
-                state = State.Dying;
-                Invoke("ReloadLevel_1",1f);
-                audioSource.PlayOneShot(deathAudio);
+                deathSequence();
                 break;
 
         }
+    }
+
+    private void deathSequence()
+    {
+        print("ded");
+        state = State.Dying;
+        audioSource.Stop();
+        audioSource.PlayOneShot(deathAudio);
+        Invoke("ReloadLevel_1", 1f);
+    }
+
+    private void successSequence()
+    {
+        print("Fin");
+        state = State.Trancending;
+        audioSource.Stop();
+        audioSource.PlayOneShot(transcendAudio);
+        Invoke("LoadNextScene", 1f);
     }
 
     private void ReloadLevel_1()

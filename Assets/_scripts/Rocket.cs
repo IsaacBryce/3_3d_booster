@@ -98,7 +98,7 @@ public class Rocket : MonoBehaviour
 
     private void successSequence()
     {
-        print("Fin");
+        //print("Fin");
         state = State.Trancending;
         audioSource.Stop();
         mainThruster.Stop();
@@ -140,7 +140,7 @@ public class Rocket : MonoBehaviour
 
     private void applyThrusting()
     {
-        print("thrusters engage");
+        //print("thrusters engage");
         float BoostThis = Boosters * Time.deltaTime;
 
         rigidBody.AddRelativeForce(Vector3.up * BoostThis);
@@ -160,14 +160,14 @@ public class Rocket : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            print("Rotating left");
+          //  print("Rotating left");
 
             transform.Rotate(Vector3.forward * rotationThisFrame);
 
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            print("Rotating Right");
+           // print("Rotating Right");
             transform.Rotate(-Vector3.forward * rotationThisFrame);
         }
         rigidBody.freezeRotation = false;//resume physics
